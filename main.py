@@ -27,10 +27,12 @@ class Game:
     def __init__(self):
         self.car = Car_go_nyoom()
         self.bg = Background()
-
+        self.road = Road()
+        
     def run(self):
         WIN.fill((100, 160, 230))
-        self.bg.draw()
+        #self.bg.draw()
+        self.road.draw()
         self.car.draw()
         self.car.move()
 
@@ -73,6 +75,23 @@ class Background:
 
     def draw(self):
         draw.rect(WIN, (79, 82, 82), (50, 50, 400, 200), 50)
+
+
+class Road:
+    def __init__(self):
+        self.image = image.load("Road.png").convert_alpha()
+
+    def draw(self):
+        for i in range(0,16):
+            WIN.blit(transform.rotate(self.image, i*6), (400, 200))
+        # for i in range(0,16):
+        #     WIN.blit(transform.flip(transform.rotate(self.image, i*6), True, False), (44, 200))
+        for i in range(0, 51):
+            WIN.blit(self.image, (i*6+100, 200))
+        for i in range(0, 26):
+            WIN.blit(transform.rotate(self.image, 90), (400, 200-i*6))
+        for i in range(0, 26):
+            WIN.blit(transform.rotate(self.image, 90), (44, 200-i*6))
 
 
 main = Main()
